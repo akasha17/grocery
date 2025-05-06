@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="confirmation-container">
+        <h1>Thank you for your order!</h1>
+        <p>Your order ID is: {{ order.id }}</p>
+        <p>Total Price: ₹{{ order.total_price }}</p>
+
+        <h2>Order Details:</h2>
+        <ul>
+            {% for item in order.orderitem_set.all %}
+                <li>
+                    {{ item.product.name }} ({{ item.quantity }}) - ₹{{ item.price }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <p><strong>Shipping Address:</strong> {{ order.address }}</p>
+        <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
+    </div>
+
+</body>
+</html>

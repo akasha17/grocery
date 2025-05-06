@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header {
+    background: #4CAF50;
+    padding: 15px;
+    color: white;
+    text-align: center;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background:#4CAF50;
+    color: white;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+nav ul li {
+    display: inline;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+.banner {
+    text-align: center;
+    padding: 50px;
+    background: #f4f4f4;
+}
+.products {
+    text-align: center;
+    padding: 20px;
+}
+.product-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.product {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 250px;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: green;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 5px;
+}
+select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+}
+button {
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background: #45a049;
+}

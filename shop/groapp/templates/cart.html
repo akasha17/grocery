@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .cart-container { max-width:800px; margin:40px auto; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
+    .qty-input { width:60px; }
+    .btn { padding:6px 12px; border:none; border-radius:4px; cursor:pointer; }
+    .btn-update { background:#4CAF50; color:#fff; }
+    .btn-remove { background:#f44336; color:#fff; }
+    .total { text-align:right; font-size:1.2em; margin-top:20px; }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h1>Your Shopping Cart</h1>
+    {% if items %}
+      <form method="post" action="{% url 'cart' %}">
+        {% csrf_token %}
+        <table>
+          <tr>
+            <th>Product</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th>Action</th>
+          </tr>
+          {% for item in items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>₹{{ item.product.discounted_price }}</td>
+            <td>
+              <form method="post" action="{% url 'update_cart_item' item.id %}">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="qty-input">
+                <button type="submit" class="btn btn-update">Update</button>
+              </form>
+            </td>
+            <td>₹{{ item.subtotal }}</td>
+            <td>
+              <a href="{% url 'remove_cart_item' item.id %}" class="btn btn-remove">Remove</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </form>
+      <div class="total"><strong>Total: ₹{{ total }}</strong></div>
+      <div style="text-align:right; margin-top:20px;">
+        <a href="{% url 'checkout' %}" class="btn btn-update">Proceed to Checkout</a>
+      </div>
+    {% else %}
+      <p>Your cart is empty. <a href="{% url 'home' %}">Continue shopping</a>.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

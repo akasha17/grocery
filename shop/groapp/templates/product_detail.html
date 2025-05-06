@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">Grocery Store</div>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="breadcrumbs">
+        <a href="{% url 'home' %}">Home</a> >
+        <a href="#">Fruits & Vegetables</a> >
+        <a href="#">Fresh Vegetables</a> >
+        <span>{{ product.name }}</span>
+    </div>
+
+    <div class="product-detail">
+        <div class="product-images">
+            <div class="thumbnail-list">
+                {% for image in product.images.all %}
+                    <img src="{{ image.url }}" onclick="changeImage(this)" alt="Thumbnail">
+                {% endfor %}
+            </div>
+            <div class="main-image">
+                <img id="mainProductImage" src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+        </div>
+
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="mrp">MRP: <s>₹{{ product.price }}</s></p>
+            <p class="price">Price: ₹{{ product.discounted_price }}</p>
+            <p class="discount">You Save: <span>{{ product.discount }}% OFF</span></p>
+            
+            <div class="pack-sizes">
+                <h3>Pack sizes</h3>
+                <select>
+                    {% for pack in product.pack_sizes.all %}
+                        <option>{{ pack.size }} - ₹{{ pack.price }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button class="add-to-cart">Add to Basket</button>
+            <button class="save-later">Save for Later</button>
+
+            <!-- Product Description Section -->
+            <div class="product-description">
+                <h2>Product Description</h2>
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeImage(thumbnail) {
+        document.getElementById("mainProductImage").src = thumbnail.src;
+    }
+</script>
+
+</body>
+</html>
